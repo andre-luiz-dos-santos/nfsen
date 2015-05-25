@@ -45,7 +45,8 @@ use IPC::SysV qw(IPC_RMID);
 my $semlock;
 
 sub seminit {
-	$semlock = semget(IPC_PRIVATE, 1, 0600 | IPC_CREAT ) || die "Can not get semaphore: $!";
+	$semlock = semget(IPC_PRIVATE, 1, 0600 | IPC_CREAT );
+	die "Can not get semaphore: $!" if !defined($semlock);
 	semsignal($semlock);
 } # End of seminit
 
